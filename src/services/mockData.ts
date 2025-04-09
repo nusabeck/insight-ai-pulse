@@ -1,4 +1,3 @@
-
 // Types for our social media data
 export interface MetricCard {
   title: string;
@@ -171,4 +170,248 @@ export const getAIAnalysis = (goalId: string): string => {
   };
 
   return analyses[goalId] || "Select a social media goal to see AI-powered insights based on your current performance metrics.";
+};
+
+// Add industry type
+export type Industry = 
+  | "Technology"
+  | "Finance"
+  | "Healthcare"
+  | "Education"
+  | "Retail"
+  | "Entertainment"
+  | "All Industries";
+
+// Update TrendInfo interface
+interface TrendInfo {
+  name: string;
+  description: string;
+  popularity: number;
+  industries: Industry[]; // Add industries field
+  weeklyGrowth?: number; // Optional growth indicator
+}
+
+export const getTrendingTopics = (network: string, industry?: Industry): Promise<TrendInfo[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      const trends = {
+        twitter: [
+          // Technology trends
+          {
+            name: "#AI",
+            description: "Discussions about artificial intelligence innovations and their impact on various industries. Popular among tech professionals and entrepreneurs.",
+            popularity: 92,
+            industries: ["Technology"],
+            weeklyGrowth: 15
+          },
+          {
+            name: "#Web3",
+            description: "Emerging discussions about blockchain, NFTs, and decentralized applications shaping the future of the internet.",
+            popularity: 88,
+            industries: ["Technology", "Finance"],
+            weeklyGrowth: 12
+          },
+          // Finance trends
+          {
+            name: "#FinTech",
+            description: "Latest developments in financial technology, digital banking, and cryptocurrency markets.",
+            popularity: 87,
+            industries: ["Finance", "Technology"],
+            weeklyGrowth: 9
+          },
+          {
+            name: "#MarketAnalysis",
+            description: "Real-time market insights, trading strategies, and economic forecasts shared by financial experts.",
+            popularity: 84,
+            industries: ["Finance"],
+            weeklyGrowth: 6
+          },
+          // Healthcare trends
+          {
+            name: "#DigitalHealth",
+            description: "Innovations in telemedicine, health tech, and patient care solutions.",
+            popularity: 86,
+            industries: ["Healthcare", "Technology"],
+            weeklyGrowth: 11
+          },
+          {
+            name: "#WellnessTech",
+            description: "Integration of technology in mental health and wellness practices.",
+            popularity: 83,
+            industries: ["Healthcare"],
+            weeklyGrowth: 7
+          },
+          // Education trends
+          {
+            name: "#EdTech",
+            description: "Digital transformation in education, online learning platforms, and teaching methodologies.",
+            popularity: 85,
+            industries: ["Education", "Technology"],
+            weeklyGrowth: 8
+          },
+          // Retail trends
+          {
+            name: "#RetailTech",
+            description: "Technology reshaping shopping experiences and retail operations.",
+            popularity: 81,
+            industries: ["Retail", "Technology"],
+            weeklyGrowth: 5
+          },
+          // Entertainment trends
+          {
+            name: "#StreamingWars",
+            description: "Competition and innovation in digital entertainment and streaming platforms.",
+            popularity: 89,
+            industries: ["Entertainment", "Technology"],
+            weeklyGrowth: 10
+          }
+        ],
+        instagram: [
+          // Entertainment focused
+          {
+            name: "#ContentCreator",
+            description: "Trending strategies and tips for creating engaging social media content.",
+            popularity: 95,
+            industries: ["Entertainment", "Retail"],
+            weeklyGrowth: 14
+          },
+          // Retail focused
+          {
+            name: "#ShopLocal",
+            description: "Small businesses showcasing products and connecting with local communities.",
+            popularity: 88,
+            industries: ["Retail"],
+            weeklyGrowth: 9
+          },
+          // Healthcare focused
+          {
+            name: "#WellnessJourney",
+            description: "Health professionals sharing wellness tips and medical knowledge through visual content.",
+            popularity: 86,
+            industries: ["Healthcare"],
+            weeklyGrowth: 7
+          },
+          // Education focused
+          {
+            name: "#LearnOnInstagram",
+            description: "Educational content creators sharing knowledge through visual storytelling.",
+            popularity: 84,
+            industries: ["Education"],
+            weeklyGrowth: 6
+          }
+        ],
+        linkedin: [
+          // Technology focused
+          {
+            name: "Tech Leadership",
+            description: "CTO and tech leaders sharing insights about industry trends and management.",
+            popularity: 91,
+            industries: ["Technology"],
+            weeklyGrowth: 11
+          },
+          // Finance focused
+          {
+            name: "Future of Banking",
+            description: "Financial industry leaders discussing digital transformation in banking.",
+            popularity: 89,
+            industries: ["Finance"],
+            weeklyGrowth: 8
+          },
+          // Healthcare focused
+          {
+            name: "Healthcare Innovation",
+            description: "Healthcare professionals sharing insights about medical technology and patient care.",
+            popularity: 87,
+            industries: ["Healthcare"],
+            weeklyGrowth: 9
+          },
+          // Education focused
+          {
+            name: "Future of Learning",
+            description: "Educators and institutions sharing perspectives on evolving education models.",
+            popularity: 86,
+            industries: ["Education"],
+            weeklyGrowth: 7
+          }
+        ],
+        facebook: [
+          // Community focused for each industry
+          {
+            name: "Tech Communities",
+            description: "Developer groups and tech communities sharing knowledge and opportunities.",
+            popularity: 88,
+            industries: ["Technology"],
+            weeklyGrowth: 6
+          },
+          {
+            name: "Financial Education",
+            description: "Groups focused on financial literacy and investment education.",
+            popularity: 85,
+            industries: ["Finance"],
+            weeklyGrowth: 5
+          },
+          {
+            name: "Healthcare Support",
+            description: "Healthcare communities providing support and information sharing.",
+            popularity: 87,
+            industries: ["Healthcare"],
+            weeklyGrowth: 8
+          }
+        ],
+        tiktok: [
+          // Entertainment & Education mix
+          {
+            name: "#LearnOnTikTok",
+            description: "Educational content creators making learning fun and accessible.",
+            popularity: 94,
+            industries: ["Education", "Entertainment"],
+            weeklyGrowth: 15
+          },
+          // Technology focused
+          {
+            name: "#TechTok",
+            description: "Tech enthusiasts sharing quick tips and tech news in engaging ways.",
+            popularity: 92,
+            industries: ["Technology", "Entertainment"],
+            weeklyGrowth: 13
+          },
+          // Finance focused
+          {
+            name: "#FinTok",
+            description: "Financial advisors and experts sharing money tips and investment advice.",
+            popularity: 90,
+            industries: ["Finance", "Education"],
+            weeklyGrowth: 11
+          },
+          // Healthcare focused
+          {
+            name: "#MedicalTok",
+            description: "Healthcare professionals sharing medical knowledge and health tips.",
+            popularity: 89,
+            industries: ["Healthcare", "Education"],
+            weeklyGrowth: 10
+          },
+          // Retail focused
+          {
+            name: "#ShopWithMe",
+            description: "Creators sharing shopping experiences and product reviews.",
+            popularity: 91,
+            industries: ["Retail", "Entertainment"],
+            weeklyGrowth: 12
+          }
+        ]
+      };
+
+      let filteredTrends = trends[network as keyof typeof trends] || [];
+      
+      // Filter by industry if specified
+      if (industry && industry !== "All Industries") {
+        filteredTrends = filteredTrends.filter(trend => 
+          trend.industries.includes(industry)
+        );
+      }
+
+      resolve(filteredTrends);
+    }, 1500);
+  });
 };
